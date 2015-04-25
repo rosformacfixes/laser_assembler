@@ -10,13 +10,9 @@ tf sensor_msgs message_filters roscpp laser_geometry filters)
 
 find_package(catkin REQUIRED COMPONENTS 
   ${THIS_PACKAGE_ROS_DEPS} 
-  message_generation
-  rostest)
+  message_generation)
 find_package(Boost REQUIRED COMPONENTS system signals)
 include_directories(include ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-
-message("catkin_libs:::::::::::::::::::::::::::::::::::::::::::")
-message(${catkin_LIBRARIES})
 
 ##############################################################################
 # Build service definitions
@@ -68,6 +64,8 @@ add_dependencies(point_cloud2_assembler ${PROJECT_NAME}_gencpp)
 ## unit testing
 
 if(CATKIN_ENABLE_TESTING)
+  find_package(rostest)
+
   add_executable(periodic_snapshotter examples/periodic_snapshotter.cpp)
   target_link_libraries(periodic_snapshotter ${catkin_LIBRARIES} ${Boost_LIBRARIES})
   add_dependencies(periodic_snapshotter ${PROJECT_NAME}_gencpp)
@@ -76,7 +74,7 @@ if(CATKIN_ENABLE_TESTING)
   target_link_libraries(dummy_scan_producer ${catkin_LIBRARIES} ${Boost_LIBRARIES})
   add_dependencies(dummy_scan_producer ${PROJECT_NAME}_gencpp)
 
-  catkin_add_gtest(test_assembler EXCLUDE_FROM_ALL test/test_assembler.cpp)
+  add_executable(test_assembler EXCLUDE_FROM_ALL test/test_assembler.cpp)
   target_link_libraries(test_assembler ${catkin_LIBRARIES} ${Boost_LIBRARIES})
   add_dependencies(test_assembler ${PROJECT_NAME}_gencpp)
 
