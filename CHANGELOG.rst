@@ -2,6 +2,11 @@
 Changelog for package laser_assembler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.7.4 (2016-04-11)
+------------------
+* properly link to gtest
+* Contributors: Vincent Rabaud
+
 1.7.3 (2015-04-25)
 ------------------
 * get the test as a proper rostest and clean CMake
